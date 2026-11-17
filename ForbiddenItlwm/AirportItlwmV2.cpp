@@ -84,6 +84,14 @@ IOReturn ItlAWDLInterface::setAWDL_PEER_TRAFFIC_REGISTRATION(apple80211_awdl_pee
     return data ? kIOReturnSuccess : kIOReturnBadArgument;
 }
 
+IOReturn ItlAWDLInterface::setAWDL_AWDL_ADVERTISERS(awdl_peer_advert_add *data)
+{
+    if (!nativeState.accept)
+        return unsupported("setAWDL_AWDL_ADVERTISERS");
+    // Acknowledged only: Intel Wi-Fi firmware does not offload Apple AWDL advertisers.
+    return data ? kIOReturnSuccess : kIOReturnBadArgument;
+}
+
 extern bool itlAWDLBuildVerified();
 
 void ItlAWDLInterface::acceptNativeRequests()
