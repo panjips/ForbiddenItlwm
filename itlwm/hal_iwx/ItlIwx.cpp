@@ -8392,7 +8392,7 @@ awdlCoexBaHandle(struct iwx_softc *sc)
     if (awdlCoexBaTxLastAskUS && askNow - awdlCoexBaTxLastAskUS < 200000ULL)
         return;
     // A calibrated schedule can rule out this window. Otherwise keep the ordinary retry cadence.
-    if (awdlCoexScheduleCurrent() && awdlCoexPeerSchedule.shouldPause(askNow)) {
+    if (awdlCoexScheduleCurrent() && awdlCoexPeerSchedule.calibrated && awdlCoexPeerSchedule.shouldPause(askNow)) {
         ++awdlCoexBaAsksSkippedAway;
         ++awdlCoexAskSkipsSinceLast;
         return;
@@ -17168,7 +17168,7 @@ awdlBaTxStep(struct iwx_softc *sc)
     if (awdlBaResponseLength || (awdlBaTxLastAskUS && now - awdlBaTxLastAskUS < 200000))
         return;
     // An ask while the phone's schedule has it away can't be answered, so it isn't spent.
-    if (awdlPeerSchedule.shouldPause(now)) {
+    if (awdlPeerSchedule.calibrated && awdlPeerSchedule.shouldPause(now)) {
         ++awdlBaTxAsksSkippedAway;
         return;
     }

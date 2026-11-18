@@ -106,7 +106,7 @@ public:
     IOReturn setAWDL_OOB_SEC_PAYLOAD_REQUEST(apple80211_awdl_af_sec_payload_request*) override { return unsupported("setAWDL_OOB_SEC_PAYLOAD_REQUEST"); }
     IOReturn setLLW_PARAMS(apple80211_llw_params*) override { return unsupported("setLLW_PARAMS"); }
     IOReturn setTX_RATE(apple80211_tx_rate*) override { return unsupported("setTX_RATE"); }
-    IOReturn setP2P_COEX_PROTECTION(apple80211_p2p_coex_protection*) override { return unsupported("setP2P_COEX_PROTECTION"); }
+    IOReturn setP2P_COEX_PROTECTION(apple80211_p2p_coex_protection*) override;
     IOReturn setPSF_DWELL(apple80211_awdl_psf_dwell_params*) override { return unsupported("setPSF_DWELL"); }
 #if __IO80211_TARGET != __MAC_14_4   // Sonoma's AWDL protocol has no setAWDL_CONFIG (62 methods, not 63)
     IOReturn setAWDL_CONFIG(apple80211_awdl_config_request*) override { return unsupported("setAWDL_CONFIG"); }

@@ -92,6 +92,14 @@ IOReturn ItlAWDLInterface::setAWDL_AWDL_ADVERTISERS(awdl_peer_advert_add *data)
     return data ? kIOReturnSuccess : kIOReturnBadArgument;
 }
 
+IOReturn ItlAWDLInterface::setP2P_COEX_PROTECTION(apple80211_p2p_coex_protection *data)
+{
+    if (!nativeState.accept)
+        return unsupported("setP2P_COEX_PROTECTION");
+    // Acknowledged only: Intel Wi-Fi firmware manages coexistence through HAL policy.
+    return data ? kIOReturnSuccess : kIOReturnBadArgument;
+}
+
 extern bool itlAWDLBuildVerified();
 
 void ItlAWDLInterface::acceptNativeRequests()
