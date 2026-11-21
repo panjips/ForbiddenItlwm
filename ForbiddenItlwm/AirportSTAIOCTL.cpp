@@ -192,6 +192,12 @@ SInt32 AirportItlwm::apple80211Request(unsigned int request_type,
         case APPLE80211_IOC_BTCOEX_PROFILES:
             IOCTL(request_type, BTCOEX_PROFILES, apple80211_btc_profiles_data);
             break;
+        case APPLE80211_IOC_BTCOEX_PROFILE:
+            // Bluetooth coexistence profile offload is not implemented. Acknowledge
+            // the request so radio management daemons do not treat it as an IOCTL
+            // dispatch failure; do not advertise APPLE80211_CAP_COEX_PROFILE_OFFLOAD.
+            ret = kIOReturnSuccess;
+            break;
         case APPLE80211_IOC_BTCOEX_CONFIG:
             IOCTL(request_type, BTCOEX_CONFIG, apple80211_btc_config_data);
             break;
